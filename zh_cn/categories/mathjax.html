@@ -61,36 +61,52 @@
             </div>
             <div class="body">
                 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">一级标题</h2>
+<h2 id="sec-1">字体标记</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-内容不能显示啊
-<code>mono</code>, <b>bold</b>
+<code>mono</code>, <b>bold</b> ，/italic/ , <code>verbatim</code> , <span class="underline">underlined</span>
 </p>
 </div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">二级标题</h3>
-<div class="outline-text-3" id="text-1-1">
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">公式和代码</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>公式
+
 <p>
-这个呢？
-公式 \( E=mc^2 \)，下面是 latex 环境
+orgmode 支持 Latex 的公式书写，\( E=mc^2 \)，可以直接使用 latex 公
+式环境
 </p>
 \begin{equation}
 x = \sqrt{b}
 \end{equation}
+</li>
+<li>希腊字母
+
 <p>
-希腊字母 α and β
-上标和下标 10m<sup>3</sup>,CO<sub>2</sub>
-安装 nikola 和 orgmode 插件
+可直接使用而且不需要使用 Latex 环境，直接在希腊字母前加反斜杠，如
+α β
 </p>
+</li>
+
+<li>上标和下标
+
+<p>
+与 Latex 里一样，如 10m<sup>3</sup>, CO<sub>2</sub>
+</p>
+</li>
+<li>插入代码
 <pre class="example">
+# 安装 Nikola 和 Orgmode 插件
 pip install nikola --user
 nikola init myblogs
 cd myblogs
 nikola install_plugin orgmode
 </pre>
 <p>
-下面是 Python 的 <i>Hello-world</i> 程序
+支持各种程序设计语言，下面是 Python 的 <i>Hello-world</i> 程序
 </p>
 <div class="org-src-container">
 
@@ -98,7 +114,65 @@ nikola install_plugin orgmode
 <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"Hello,world!"</span>
 </pre>
 </div>
+<p>
+C 语言的 <i>Hello-world</i> 程序
+</p>
+</li>
+</ul>
 </div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">链接，表格</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+点<a href="http://self-definition.com">这里</a> 访问我的主页
+</p>
+
+<p>
+插入表格也是极其方便的
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="left">
+
+<col class="right">
+
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Name</th>
+<th scope="col" class="right">Phone</th>
+<th scope="col" class="right">Age</th>
+<th scope="col" class="left">Country</th>
+<th scope="col" class="left">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Peter</td>
+<td class="right">1234</td>
+<td class="right">15</td>
+<td class="left">America</td>
+<td class="left">male</td>
+</tr>
+
+<tr>
+<td class="left">Anna</td>
+<td class="right">3142</td>
+<td class="right">22</td>
+<td class="left">France</td>
+<td class="left">female</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
             </div>
