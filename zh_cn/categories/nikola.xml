@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (nikola)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/zh_cn/categories/nikola.xml" type="application/rss+xml" rel="self"></atom:link><language>zh_cn</language><lastBuildDate>Tue, 04 Feb 2014 17:59:01 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>测试</title><link>http://self-definition.com/zh_cn/posts/ce-shi.html</link><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;一级标题&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+内容不能显示啊
+&lt;code&gt;mono&lt;/code&gt;, &lt;b&gt;bold&lt;/b&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h3 id="sec-1-1"&gt;二级标题&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;p&gt;
+这个呢？
+公式 \( E=mc^2 \)，下面是 latex 环境
+&lt;/p&gt;
+\begin{equation}
+x = \sqrt{b}
+\end{equation}
+&lt;p&gt;
+希腊字母 α and β
+上标和下标 10m&lt;sup&gt;3&lt;/sup&gt;,CO&lt;sub&gt;2&lt;/sub&gt;
+安装 nikola 和 orgmode 插件
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+pip install nikola --user
+nikola init myblogs
+cd myblogs
+nikola install_plugin orgmode
+&lt;/pre&gt;
+&lt;p&gt;
+下面是 Python 的 &lt;i&gt;Hello-world&lt;/i&gt; 程序
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;#&lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;!/usr/bin/env python&lt;/span&gt;
+&lt;span style="font-weight: bold;"&gt;print&lt;/span&gt; &lt;span style="font-style: italic;"&gt;"Hello,world!"&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><guid>http://self-definition.com/zh_cn/posts/ce-shi.html</guid><pubDate>Sun, 02 Feb 2014 10:18:31 GMT</pubDate></item><item><title>为 Nikola 增加 orgmode 支持</title><link>http://self-definition.com/zh_cn/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</link><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;为什么是 orgmode&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+&lt;a href="http://orgmode.org/"&gt;orgmode&lt;/a&gt; 是 Emacs 的一种文档编辑模式，但远不止如此，orgmode 本身是一种
+轻量级标记语言，与 &lt;a href="http://zh.wikipedia.org/zh-cn/Markdown"&gt;Markdown&lt;/a&gt; , &lt;a href="http://zh.wikipedia.org/wiki/ReStructuredText"&gt;reStructuredText&lt;/a&gt; , &lt;a href="http://en.wikipedia.org/wiki/Textile_%2528markup_language%2529"&gt;Textile&lt;/a&gt; 等相似，非常
+适合写文档博客，这一点上与这些轻量级标记语言类似，但 orgmode 还是一种
+强大的 &lt;a href="http://zh.wikipedia.org/wiki/GTD"&gt;GTD&lt;/a&gt; 工具，官网的口号是 &lt;i&gt;Your Life in Plain Text&lt;/i&gt; ，借助 Emacs
+这个强大的编辑器，orgmode 堪称最强大的轻量级标记语言，同时也能非常方
+便地输出成各种格式的文档，写各类技术文章极其方便，是 Emacs 党写文档的
+不二选择。网上文档非常多，不愿在这里多费唇舌，以后兴许会写个学习笔记。
+不过到目前为止一直没有用过orgmode 的 GTD，主要因为个人不太习惯做时间
+管理。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;为 Nikola 增加 orgmode 支持&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Nikola 前面的博文已经简单介绍过了，很好很强大，内置多种标记语言支持，
+但没有包括 orgmode，不过这个不是问题，已经有 Geek 为我们备好了
+orgmode 插件，简单的 &lt;code&gt;nikola install_plugin orgmode&lt;/code&gt; 就装上了这个插件，
+不过需要在项目的目录里执行这条命令，而且貌似天朝把 nikola 的插件、主
+题都拦在了墙外，这也难不倒我们，毕竟爬梯是程序猿们的必备技能。然后修
+改配置文件 conf.py
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;在 posts 和 stories 中添加&lt;/span&gt;
+(&lt;span style="font-style: italic;"&gt;"posts/*.org"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"posts"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"post.tmpl"&lt;/span&gt;),
+(&lt;span style="font-style: italic;"&gt;"stories/*.org"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"stories"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"stories.tmpl"&lt;/span&gt;),
+&lt;span style="font-weight: bold; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;在 COMPILERS 中添加&lt;/span&gt;
+{&lt;span style="font-style: italic;"&gt;"orgmode"&lt;/span&gt;: (&lt;span style="font-style: italic;"&gt;'.org'&lt;/span&gt;,),}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;
+然后就可以用来写英文博客了，英文，Nani？是的，中文会报错，我是说中文
+标题会有问题: &lt;b&gt;UnicodeEncodeError&lt;/b&gt; ，查看了源码，问题出在
+&lt;code&gt;fd.write('..{0}: {1}\n'.format(k,v))&lt;/code&gt; 这一行，将其改为
+&lt;code&gt;fd.write(u'..{0}: {1}\n'.format(k,v))&lt;/code&gt; 就可以支持中文了。然后，然后
+该干嘛干嘛-:)
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><guid>http://self-definition.com/zh_cn/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</guid><pubDate>Sat, 01 Feb 2014 21:33:00 GMT</pubDate></item></channel></rss>

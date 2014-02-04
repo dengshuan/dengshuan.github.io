@@ -1,0 +1,34 @@
+#+BEGIN_COMMENT
+.. description: 
+.. tags: emacs,nikola,mathjax
+.. title: 测试
+.. link: 
+.. date: 2014/02/02 18:18:31
+.. type: text
+.. slug: ce-shi
+#+END_COMMENT
+
+
+* 一级标题
+  内容不能显示啊
+  =mono=, *bold*
+** 二级标题
+   这个呢？
+   公式 \( E=mc^2 \)，下面是 latex 环境
+   \begin{equation}
+   x = \sqrt{b}
+   \end{equation}
+   希腊字母 \alpha and \beta
+   上标和下标 10m^3,CO_2
+   安装 nikola 和 orgmode 插件
+   #+BEGIN_EXAMPLE
+     pip install nikola --user
+     nikola init myblogs
+     cd myblogs
+     nikola install_plugin orgmode
+   #+END_EXAMPLE
+   下面是 Python 的 /Hello-world/ 程序
+   #+BEGIN_SRC python
+     #!/usr/bin/env python
+     print "Hello,world!"
+   #+END_SRC
