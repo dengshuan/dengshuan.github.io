@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (python)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/python.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Feb 2014 17:59:01 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>为 Nikola 增加 orgmode 支持</title><link>http://self-definition.com/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</link><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (python)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/python.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Feb 2014 18:11:28 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>为 Nikola 增加 orgmode 支持</title><link>http://self-definition.com/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</link><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h2 id="sec-1"&gt;为什么是 orgmode&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -43,4 +43,86 @@ orgmode 插件，简单的 &lt;code&gt;nikola install_plugin orgmode&lt;/code&gt
 该干嘛干嘛-:)
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>nikola</category><category>python</category><guid>http://self-definition.com/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</guid><pubDate>Sat, 01 Feb 2014 21:33:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>emacs</category><category>nikola</category><category>python</category><guid>http://self-definition.com/posts/wei-nikola-zeng-jia-orgmode-zhi-chi.html</guid><pubDate>Sat, 01 Feb 2014 21:33:00 GMT</pubDate></item><item><title>开始用 Nikola 写博客</title><link>http://self-definition.com/posts/kai-shi-yong-nikola-xie-bo-ke.html</link><description>&lt;div&gt;&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;源起&lt;/h2&gt;
+&lt;p&gt;作为一个技术人，拥有一个自己的博客是必须的，可以用来记录自己学习笔记，
+解决学习工作中遇到的问题的方法，发表对一些技术的观点，对人生和生活的一
+些感悟。总之，博客是一个平台，记录自己的成长，我希望通过博客达到
+Record, Think,Summarize,Improve 的目的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;方案&lt;/h2&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;常见的方案&lt;/h3&gt;
+&lt;p&gt;常见的技术博客一般分为下面3类：现有技术博客网站，用Web框架自己在VPS上搭
+建动态博客，使用轻量级标记语言写静态博客
+- Cnblogs,CSDN等现成的技术博客平台
+- Wordpress,Django,Flask,webpy等搭建
+- Jekyll,Octopress, Nikola,Pecila等静态博客
+其中用框架搭建动态博客最折腾；利用现成的博客平台最简单--注册帐号就可以
+写，但通常而言不够灵活且一般只能在网页上编辑，对于 coder 而言，永远是自
+己的本地编辑器最方便；现在越来越多的人从这两种方案转向第三种方案，使用
+markdown,reStructured,org 等轻量标记语言写博客，然后直接上传到托管平台
+或在本地用一些转换工具生成 html 文件再上传到托管平台，对于程序员，文本
+文件永远是最透明的，管理起来也非常方便，尤其是借助版本控制器，更改同步
+变得 So easy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;我的选择&lt;/h3&gt;
+&lt;p&gt;在折腾过各种方案后，最终选择了用 Nikola 构建静态博客。尝试过在 Cnblog
+上写，因为在网页上写起来不方便而放弃；也尝试过用 Flask 和 Webpy 等自己
+手动搭建一个动态博客站点，因为太折腾而且最终功能和效果很不理想而放弃；
+Jekyll 和 Octopress 是 Ruby Powered，没学过懒得折腾，Hyde 也用过，还不
+错不过好久没更新，Nikola 更新比较频繁，开发很活跃对中文支持也非常棒。所
+以选定了 Nikola，希望这是我的博客的最终归属。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nikola"&gt;
+&lt;h2&gt;Nikola 安装使用方法&lt;/h2&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Debian 下安装&lt;/dt&gt;
+&lt;dd&gt;&lt;pre class="first last literal-block"&gt;
+sudo apt-get install build-essential python-dev libxml2-dev libxslt1-dev python-pip
+pip install nikola --user
+&lt;/pre&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;使用 Nikola&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;生成博客站点目录&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+nikola init myblogs
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;修改 myblogs/conf.py 中的相关设定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;在 myblogs 目录下新建博客&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+nikola new_post
+&lt;/pre&gt;
+&lt;p&gt;根据提示输入文章标题，会在 posts 目录下生成博客，中文标题生成的博客
+文件名会自动转成拼音，这个功能相当赞。然后就是用你最喜欢的编辑器编辑
+posts 目录下的 .rst 或 .txt 或 .md 文件了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;生成 html&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+nikola build
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;本地预览&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+nikola serve
+&lt;/pre&gt;
+&lt;p&gt;浏览器打开 &lt;a class="reference external" href="http://127.0.0.1:8000"&gt;http://127.0.0.1:8000&lt;/a&gt;
+也可以用 &lt;code&gt;nikola serve -a 0.0.0.0 -p 8000&lt;/code&gt; 指定地址和端口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;上传&lt;/p&gt;
+&lt;p&gt;使用版本管理器将 output 目录下的文件上传到托管服务器即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>python</category><guid>http://self-definition.com/posts/kai-shi-yong-nikola-xie-bo-ke.html</guid><pubDate>Sat, 01 Feb 2014 06:21:49 GMT</pubDate></item></channel></rss>

@@ -217,25 +217,112 @@ orgmode 插件，简单的 <code>nikola install_plugin orgmode</code> 就装上�
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/kai-shi-shi-yong-nikola-xie-bo-ke.html">开始使用 Nikola 写博客</a></h1>
+            <h1 class="title"><a href="posts/kai-shi-yong-nikola-xie-bo-ke.html">开始用 Nikola 写博客</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2014-02-01T17:09:40+08:00">2014-02-01 17:09</time>
+                    <time class="timeago" datetime="2014-02-01T14:21:49+08:00">2014-02-01 14:21</time>
                 </div>
                 <div class="stats">
                     
         
     <p>
-        <a href="posts/kai-shi-shi-yong-nikola-xie-bo-ke.html#disqus_thread" data-disqus-identifier="cache/posts/kai-shi-shi-yong-nikola-xie-bo-ke.html">Comments</a>
+        <a href="posts/kai-shi-yong-nikola-xie-bo-ke.html#disqus_thread" data-disqus-identifier="cache/posts/kai-shi-yong-nikola-xie-bo-ke.html">Comments</a>
 
 
                 </p></div>
                 
+    <div class="tags">
+        <ul>
+        更多相关文章：:  
+            <li><a class="tag" href=".././zh_cn/categories/python.html">python</a></li>
+        </ul>
+    </div>
 
             </div>
             <div class="body">
-                <p>Write your post here.
-第一篇博客</p>
+                <div><div class="section" id="id1">
+<h2>源起</h2>
+<p>作为一个技术人，拥有一个自己的博客是必须的，可以用来记录自己学习笔记，
+解决学习工作中遇到的问题的方法，发表对一些技术的观点，对人生和生活的一
+些感悟。总之，博客是一个平台，记录自己的成长，我希望通过博客达到
+Record, Think,Summarize,Improve 的目的。</p>
+</div>
+<div class="section" id="id2">
+<h2>方案</h2>
+<div class="section" id="id3">
+<h3>常见的方案</h3>
+<p>常见的技术博客一般分为下面3类：现有技术博客网站，用Web框架自己在VPS上搭
+建动态博客，使用轻量级标记语言写静态博客
+- Cnblogs,CSDN等现成的技术博客平台
+- Wordpress,Django,Flask,webpy等搭建
+- Jekyll,Octopress, Nikola,Pecila等静态博客
+其中用框架搭建动态博客最折腾；利用现成的博客平台最简单--注册帐号就可以
+写，但通常而言不够灵活且一般只能在网页上编辑，对于 coder 而言，永远是自
+己的本地编辑器最方便；现在越来越多的人从这两种方案转向第三种方案，使用
+markdown,reStructured,org 等轻量标记语言写博客，然后直接上传到托管平台
+或在本地用一些转换工具生成 html 文件再上传到托管平台，对于程序员，文本
+文件永远是最透明的，管理起来也非常方便，尤其是借助版本控制器，更改同步
+变得 So easy.</p>
+</div>
+<div class="section" id="id4">
+<h3>我的选择</h3>
+<p>在折腾过各种方案后，最终选择了用 Nikola 构建静态博客。尝试过在 Cnblog
+上写，因为在网页上写起来不方便而放弃；也尝试过用 Flask 和 Webpy 等自己
+手动搭建一个动态博客站点，因为太折腾而且最终功能和效果很不理想而放弃；
+Jekyll 和 Octopress 是 Ruby Powered，没学过懒得折腾，Hyde 也用过，还不
+错不过好久没更新，Nikola 更新比较频繁，开发很活跃对中文支持也非常棒。所
+以选定了 Nikola，希望这是我的博客的最终归属。</p>
+</div>
+</div>
+<div class="section" id="nikola">
+<h2>Nikola 安装使用方法</h2>
+<div class="section" id="id5">
+<h3>安装</h3>
+<dl class="docutils">
+<dt>Debian 下安装</dt>
+<dd><pre class="first last literal-block">
+sudo apt-get install build-essential python-dev libxml2-dev libxslt1-dev python-pip
+pip install nikola --user
+</pre>
+</dd>
+</dl>
+</div>
+<div class="section" id="id6">
+<h3>使用 Nikola</h3>
+<ul>
+<li><p class="first">生成博客站点目录</p>
+<pre class="literal-block">
+nikola init myblogs
+</pre>
+</li>
+<li><p class="first">修改 myblogs/conf.py 中的相关设定</p>
+</li>
+<li><p class="first">在 myblogs 目录下新建博客</p>
+<pre class="literal-block">
+nikola new_post
+</pre>
+<p>根据提示输入文章标题，会在 posts 目录下生成博客，中文标题生成的博客
+文件名会自动转成拼音，这个功能相当赞。然后就是用你最喜欢的编辑器编辑
+posts 目录下的 .rst 或 .txt 或 .md 文件了。</p>
+</li>
+<li><p class="first">生成 html</p>
+<pre class="literal-block">
+nikola build
+</pre>
+</li>
+<li><p class="first">本地预览</p>
+<pre class="literal-block">
+nikola serve
+</pre>
+<p>浏览器打开 <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>
+也可以用 <code>nikola serve -a 0.0.0.0 -p 8000</code> 指定地址和端口</p>
+</li>
+<li><p class="first">上传</p>
+<p>使用版本管理器将 output 目录下的文件上传到托管服务器即可</p>
+</li>
+</ul>
+</div>
+</div></div>
             </div>
         </div>
     
