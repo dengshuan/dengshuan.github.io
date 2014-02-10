@@ -35,6 +35,136 @@
         <div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="../posts/yong-git-zuo-wei-nikola-bo-ke-fa-bu-gong-ju.html">用 git 作为 nikola 博客发布工具</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-09T23:23:43+08:00">2014-02-09 23:23</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <p>
+        <a href="../posts/yong-git-zuo-wei-nikola-bo-ke-fa-bu-gong-ju.html#disqus_thread" data-disqus-identifier="cache/posts/yong-git-zuo-wei-nikola-bo-ke-fa-bu-gong-ju.html">Comments</a>
+
+
+                </p></div>
+                
+    <div class="tags">
+        <ul>
+        更多相关文章：:  
+            <li><a class="tag" href="../.././zh_cn/categories/git.html">git</a></li>
+            <li><a class="tag" href="../.././zh_cn/categories/nikola.html">nikola</a></li>
+        </ul>
+    </div>
+
+            </div>
+            <div class="body">
+                <p>
+前面已经介绍过用 Nikola 和 Emacs 的 org-mode 写博客，这篇文章讲讲如何部
+署发布博客。其实 Nikola 文档中 <a href="http://getnikola.com/handbook.html#deployment">Deployment</a> 已经讲过，还给了一个链接
+<a href="http://toroid.org/ams/git-website-howto">git-website-howto</a> 一步步介绍怎么通过 git 部署发布一个网站。本文的目的是
+给自己写一个备忘，同时也方便一些国内 nikola 或类似静态博客使用者作参考。
+</p>
+
+<p>
+之前准备在 Digitalocean 的 VPS 上直接写博客的，然后将 Nikola 生成的静态
+文件（output）直接软链接到 Nginx 的 root 目录去，试过这种方案结果老提示
+403 错误，也尝试过直接将 root 设为 output 目录，老是报 403 错误，改过
+output 目录权限还是 403 错误，就没再折腾了，应该是我对 Nginx 的机制没搞
+清楚造成的，有时间要好好学习一下 Nginx 的配置。而且直接在 VPS 上编辑文
+档不太方便，所以就放弃了这种方案，所以就有了我现在的博客。
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">本地库(local repository)</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+本地的库位于 output 目录，通过 <code>nikola init myblogs</code> 生成的项目目录最
+开始是不包含 output 目录的，所以在初始化项目后需要在项目目录
+<b>myblogs</b> 中新建一个 output 目录，然后在这个目录中执行 git 初始化操作。
+下面是这段的相关命令操作
+</p>
+<pre class="example">
+nikola init myblogs
+mkdir myblogs/output &amp;&amp; cd myblogs/output
+git init
+</pre>
+<p>
+然后开始写博客 <code>nikola new_post</code> ，生成博客 <code>nikola build</code> ，
+<b>output</b> 目录里就有了新博客，把新增博客添加到 git 版本控制之中，然后
+提交，当然这是提交到本地，我们还没有设置远程服务器。下面是这段的相关
+命令流程
+</p>
+<pre class="example">
+nikola new_po   # edit your blogs
+nikola build
+nikola serve    # preview blog locally
+git add *       # in output directory
+git commit -a -m "My first post"
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">远程库(remote repository)</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+远程库的名字随便取，与本地库没有关系。应该用 git 初始化为一个裸(bare)库。
+</p>
+<pre class="example">
+ssh remote_username@remote_host
+mkdir website.git &amp;&amp; cd website.git
+git init --bare
+</pre>
+<p>
+然后写一个钩子脚本(hook script)，该脚本在同步成功后执行，用于把 push
+上来的文件检出到网页服务器的 DocumentRoot ，即 Nginx 的 root 目录。
+</p>
+<pre class="example">
+mkdir -p /srv/http/blogs
+vim ~/website.git/hooks/post-receive
+chmod +x ~/website.git/hooks/post-receive
+
+# add following script to post-receive file
+#!/bin/sh
+git_work_tree=/srv/http/blogs git checkout -f
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">连接本地库和远程库</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+首先在本机生成 ssh 的公钥，然后将公钥上传到远程服务器，添加该公钥为受
+信任，这样本机通过 ssh 连接远程服务器就不需要再输入密码了。然后将远程
+库添加到本地，最后就可以 push 同步博客到 VPS 了，而且会自动在服务器端
+部署好，这样一条 push 命令就发布了你的博客。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">ssh-keygen -t rsa
+scp .ssh/id_rsa.pub remote_username@remote_host:
+ssh remote_username@remote_host
+mkdir -p ~/.ssh
+mv ~/id_rsa.pub ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+<span style="font-weight: bold;">exit</span>
+<span style="font-weight: bold;">cd</span> myblogs/output
+git remote add blog ssh://remote_username@remote_host/home/remote_username/website.git
+git push blog +master:refs/heads/master
+</pre>
+</div>
+<p>
+以后发布新博客只需要 <code>git push blog</code> 就可以了。前面几篇博客到本篇博客
+介绍了用 Nikola 和 orgmode 写静态博客，并用 git 工具发布博客的整个流
+程，可以看出整个过程比较简单，而且写起 orgmode 文件也很愉快，So
+happy hacking and blogging!（以后有空会再把这个过程进一步简化，使得在
+Emacs 里实现一键发布）
+</p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="../posts/ce-shi.html">测试</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -248,6 +378,116 @@ orgmode 插件，简单的 <code>nikola install_plugin orgmode</code> 就装上�
 </p>
 </div>
 </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="../posts/kai-shi-yong-nikola-xie-bo-ke.html">开始用 Nikola 写博客</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-01T14:21:49+08:00">2014-02-01 14:21</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <p>
+        <a href="../posts/kai-shi-yong-nikola-xie-bo-ke.html#disqus_thread" data-disqus-identifier="cache/posts/kai-shi-yong-nikola-xie-bo-ke.html">Comments</a>
+
+
+                </p></div>
+                
+    <div class="tags">
+        <ul>
+        更多相关文章：:  
+            <li><a class="tag" href="../.././zh_cn/categories/python.html">python</a></li>
+            <li><a class="tag" href="../.././zh_cn/categories/nikola.html">nikola</a></li>
+        </ul>
+    </div>
+
+            </div>
+            <div class="body">
+                <div><div class="section" id="id1">
+<h3>源起</h3>
+<p>作为一个技术人，拥有一个自己的博客是必须的，可以用来记录自己学习笔记，
+平时学习工作中遇到的问题的解决方法，发表对一些技术的看法和观点以及对人
+生和生活的一些感悟。总之，博客是一个很好的平台，记录自己的成长，我希望
+通过博客达到Record, Think, Summarize, Improve 的目的。</p>
+</div>
+<div class="section" id="id2">
+<h3>方案</h3>
+<div class="section" id="id3">
+<h4>常见的方案</h4>
+<p>常见的技术博客一般可以分为下面3类：现成的技术博客网站，用Web框架自己在
+VPS上搭建动态博客，使用轻量级标记语言写静态博客</p>
+<ul class="simple">
+<li>Cnblogs,CSDN 等现成的技术博客平台</li>
+<li>Wordpress,RoR,Django,Flask 等搭建</li>
+<li>Jekyll,Octopress,Nikola,Peclian 等静态博客</li>
+</ul>
+<p>其中用框架搭建动态博客最折腾；利用现成的博客平台最简单--注册帐号就可以
+写博客，但通常而言不够灵活且一般只能在网页上编辑，对于 coder 而言，永远
+是自己的本地编辑器最方便；现在越来越多的人从这两种方案转向第三种，使用
+markdown,reStructured,org 等轻量标记语言写博客，然后直接上传到托管平台
+或在本地用一些转换工具生成 html 文件再上传到托管平台，对于程序员，文本
+文件永远是最透明的，管理起来也非常方便，尤其是借助版本控制器，更改同步
+变得 So easy.</p>
+</div>
+<div class="section" id="id4">
+<h4>我的选择</h4>
+<p>在折腾过各种方案后，最终选择了用 Nikola 构建静态博客。尝试过在 Cnblog上
+写，因为在网页上写起来不方便而放弃；也尝试过用 Flask 和 Webpy 等自己手
+动搭建一个动态博客站点，因为太折腾而且最终功能和效果很不理想而放弃；
+Jekyll 和 Octopress 是 Ruby Powered，没学过 Ruby 懒得折腾；Hyde 也用过，
+还不错不过好久没更新了；Nikola 更新比较频繁开发很活跃，有许多 <a class="reference external" href="http://plugins.getnikola.com/">插件</a>
+和 <a class="reference external" href="http://themes.getnikola.com/">主题</a> ，而且支持多国语言，所以选定了 Nikola，希望这是我的博客的最
+终归属。</p>
+</div>
+</div>
+<div class="section" id="nikola">
+<h3>Nikola 安装使用方法</h3>
+<div class="section" id="id7">
+<h4>安装</h4>
+<ul>
+<li><p class="first">Debian 下安装</p>
+<pre class="literal-block">
+sudo apt-get install build-essential python-dev libxml2-dev libxslt1-dev python-pip
+pip install nikola requests webassets --user
+</pre>
+</li>
+<li><p class="first">ArchLinux 下安装</p>
+<pre class="literal-block">
+sudo pacman -S libxml2 libxslt python2-pip
+pip2 install nikola requests webassets --user
+</pre>
+</li>
+</ul>
+<p>添加路径到环境变量 <tt class="docutils literal">export <span class="pre">PATH=$PATH:~/.local/bin</span></tt> 或者将其写入
+<em>.bashrc</em> 文件中然后 <tt class="docutils literal">source <span class="pre">~/.bashrc</span></tt></p>
+</div>
+<div class="section" id="id8">
+<h4>使用 Nikola</h4>
+<ol class="arabic">
+<li><p class="first">生成博客站点目录</p>
+<p><tt class="docutils literal">nikola init myblogs</tt> 会生成项目的空目录和配置文件</p>
+</li>
+<li><p class="first">修改 myblogs/conf.py</p>
+<p>修改 <em>BLOG_AUTHOR</em>, <em>BLOG_TITLE</em> , <em>BLOG_EMAIL</em> , <em>BLOG_DESCRIPTION</em> 等相关变量</p>
+</li>
+<li><p class="first">在 myblogs 目录下新建博客</p>
+<p><tt class="docutils literal">nikola new_post</tt> 根据提示输入文章标题，会在 posts 目录下生成博客，  中文标题生成的博客文件名会自动转成拼音，这个功能相当赞。然后就是用你最喜欢的编辑器编辑posts 目录下的 .rst 或 .txt 或 .md 文件了。</p>
+</li>
+<li><p class="first">生成 html</p>
+<p><tt class="docutils literal">nikola build</tt> 会将 posts 目录下的标记文本转换成 html，生成的文件默认在 output 目录下</p>
+</li>
+<li><p class="first">本地预览</p>
+<p><tt class="docutils literal">nikola serve</tt> 然后用浏览器打开 <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>
+也可以用 <tt class="docutils literal">nikola serve <span class="pre">-a</span> 0.0.0.0 <span class="pre">-p</span> 8000</tt> 指定地址和端口</p>
+</li>
+<li><p class="first">上传 html 静态文件</p>
+<p>使用版本管理器将 output 目录下的文件上传到托管服务器即可</p>
+</li>
+</ol>
+</div>
+</div></div>
             </div>
         </div>
     

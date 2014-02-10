@@ -1,7 +1,7 @@
 .. title: 开始用 Nikola 写博客
 .. slug: kai-shi-yong-nikola-xie-bo-ke
 .. date: 2014/02/01 14:21:49
-.. tags: python
+.. tags: python,nikola
 .. link: 
 .. description: 
 .. type: text
