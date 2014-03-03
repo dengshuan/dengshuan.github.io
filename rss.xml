@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs</title><link>http://self-definition.com/</link><description>御风而行，从心所欲不逾矩</description><atom:link href="http://self-definition.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Mar 2014 00:34:25 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>AVOS Hackathon 活动</title><link>http://self-definition.com/posts/avos-hackathon-huo-dong.html</link><description>&lt;p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs</title><link>http://self-definition.com/</link><description>御风而行，从心所欲不逾矩</description><atom:link href="http://self-definition.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Mar 2014 13:03:28 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>AVOS Cloud Hackathon 活动</title><link>http://self-definition.com/posts/avos-cloud-hackathon-huo-dong.html</link><description>&lt;p&gt;
 从 SegmentFault 侧栏广告位看到 AVOS Cloud 在这两天举行，当时看 V2EX 上
 没人发相关的信息，于是就把这条贴了上去，顺便征询 V 友意见，有前辈鼓励和
 一批 V 友回复，头脑发热就报了名，同时征了几个队友，好像大家都比较酱油，
@@ -8,12 +8,13 @@
 &lt;/p&gt;
 
 &lt;p&gt;
-昨天大清早的爬起来坐班车，7:30 走 9:10 才到，差不多2小时，去了之后临时
-又找了3个哥们加入，一个搞 Unity 游戏开发的，一个产品经理，还有一个
-Java 员，加上和我一起去的 V 友是做产品设计的，本人算一个 Python 员吧，
-可以看出真正能写 coding 的也就勉强算3个，而且没有人会做移动应用。就这么
-临时凑了一个团队，idea 也没有提前想好，临时讨论并否定了一大堆，最终选择
-了做一个基于地理位置的陌生人交流应用。
+昨天大清早的爬起来坐班车，一起进城的还有同学和他基友去天安门玩，和一个
+同学送妹子回城，只有我一个屌丝是孤身一人坐2小时班车去参加 hackathon。去
+了之后临时又找了3个哥们加入，一个搞 Unity 游戏开发的，一个产品经理，还
+有一个Java 员，加上和我一起去的 V 友是做产品设计的，本人算一个 Python
+员吧，可以看出真正能写 coding 的也就勉强算3个，而且没有人会做移动应用。
+就这么临时凑了一个团队，idea 也没有提前想好，临时讨论并否定了一大堆，最
+终选择了做一个基于地理位置的陌生人交流应用。
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -53,6 +54,16 @@ about them&lt;/b&gt;. 这是参加这次 Hackathon 让我最不爽的地方，�
 &lt;/p&gt;
 
 &lt;p&gt;
+放张团队合影照权作纪念
+&lt;/p&gt;
+
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://self-definition.com/galleries/life/hackathon.jpg" alt="hackathon.jpg"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
 说些收获吧，这次 Hackathon 让我在实际项目中应用了 git 工具，对版本控制
 软件的工作流程更加熟悉了，另外对于一款产品从 Idea 到最终产品整个过程有
 了亲身体验认识，以前都是一个人闭门造车式的写程序(当然是物理的，因为对于
@@ -60,7 +71,7 @@ about them&lt;/b&gt;. 这是参加这次 Hackathon 让我最不爽的地方，�
 Idea 和产品设计。最后吐槽和八卦一下：AVOS Cloud 的后台管理以及 Demo 对
 Firefox 兼容性很糟糕；最终的一等将是一对情侣开发的一款约炮应用“咱俩”(偷
 笑)。
-&lt;/p&gt;</description><category>hack</category><category>LBS</category><category>cloud</category><guid>http://self-definition.com/posts/avos-hackathon-huo-dong.html</guid><pubDate>Sun, 02 Mar 2014 15:05:17 GMT</pubDate></item><item><title>用 git 作为 nikola 博客发布工具</title><link>http://self-definition.com/posts/yong-git-zuo-wei-nikola-bo-ke-fa-bu-gong-ju.html</link><description>&lt;p&gt;
+&lt;/p&gt;</description><category>hack</category><category>LBS</category><category>cloud</category><category>life</category><guid>http://self-definition.com/posts/avos-cloud-hackathon-huo-dong.html</guid><pubDate>Sun, 02 Mar 2014 15:05:17 GMT</pubDate></item><item><title>用 git 作为 nikola 博客发布工具</title><link>http://self-definition.com/posts/yong-git-zuo-wei-nikola-bo-ke-fa-bu-gong-ju.html</link><description>&lt;p&gt;
 前面已经介绍过用 Nikola 和 Emacs 的 org-mode 写博客，这篇文章讲讲如何部
 署发布博客。其实 Nikola 文档中 &lt;a href="http://getnikola.com/handbook.html#deployment"&gt;Deployment&lt;/a&gt; 已经讲过，还给了一个链接
 &lt;a href="http://toroid.org/ams/git-website-howto"&gt;git-website-howto&lt;/a&gt; 一步步介绍怎么通过 git 部署发布一个网站。本文的目的是

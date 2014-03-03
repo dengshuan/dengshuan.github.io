@@ -57,6 +57,14 @@
   <lastmod>2014-03-03</lastmod>
  </url>
  <url>
+  <loc>http://self-definition.com/categories/life.html</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/categories/life.xml</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
   <loc>http://self-definition.com/categories/mathjax.html</loc>
   <lastmod>2014-03-03</lastmod>
  </url>
@@ -82,7 +90,15 @@
  </url>
  <url>
   <loc>http://self-definition.com/galleries/index.html</loc>
-  <lastmod>2014-02-04</lastmod>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/galleries/life/index.html</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/galleries/life/rss.xml</loc>
+  <lastmod>2014-03-03</lastmod>
  </url>
  <url>
   <loc>http://self-definition.com/galleries/rss.xml</loc>
@@ -95,6 +111,10 @@
  <url>
   <loc>http://self-definition.com/listings/index.html</loc>
   <lastmod>2014-02-04</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/posts/avos-cloud-hackathon-huo-dong.html</loc>
+  <lastmod>2014-03-03</lastmod>
  </url>
  <url>
   <loc>http://self-definition.com/posts/avos-hackathon-huo-dong.html</loc>
@@ -177,6 +197,14 @@
   <lastmod>2014-03-03</lastmod>
  </url>
  <url>
+  <loc>http://self-definition.com/zh_cn/categories/life.html</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/zh_cn/categories/life.xml</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
   <loc>http://self-definition.com/zh_cn/categories/mathjax.html</loc>
   <lastmod>2014-03-03</lastmod>
  </url>
@@ -202,7 +230,15 @@
  </url>
  <url>
   <loc>http://self-definition.com/zh_cn/galleries/index.html</loc>
-  <lastmod>2014-02-04</lastmod>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/zh_cn/galleries/life/index.html</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/zh_cn/galleries/life/rss.xml</loc>
+  <lastmod>2014-03-03</lastmod>
  </url>
  <url>
   <loc>http://self-definition.com/zh_cn/galleries/rss.xml</loc>
@@ -210,6 +246,10 @@
  </url>
  <url>
   <loc>http://self-definition.com/zh_cn/index.html</loc>
+  <lastmod>2014-03-03</lastmod>
+ </url>
+ <url>
+  <loc>http://self-definition.com/zh_cn/posts/avos-cloud-hackathon-huo-dong.html</loc>
   <lastmod>2014-03-03</lastmod>
  </url>
  <url>
