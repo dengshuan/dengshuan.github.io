@@ -1,5 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (hack)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/hack.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Mar 2014 13:03:28 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>AVOS Cloud Hackathon 活动</title><link>http://self-definition.com/posts/avos-cloud-hackathon-huo-dong.html</link><description>&lt;p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (hack)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/hack.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Mar 2014 22:24:20 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>CMCC-EDU 简易客户端</title><link>http://self-definition.com/posts/cmcc-edu-jian-yi-ke-hu-duan.html</link><description>&lt;p&gt;
+上周抽空写了个 Python 版的 &lt;a href="https://github.com/dengshuan/cmcc-edu"&gt;CMCC-EDU 客户端&lt;/a&gt;，没什么技术含量，不过作为本
+人在 github 上的第一个实际有意义的项目，还是在这里记录一下。
+&lt;/p&gt;
+
+&lt;p&gt;
+关于为什么写这个客户端，在项目的 &lt;a href="https://github.com/dengshuan/cmcc-edu/blob/master/README.org"&gt;README&lt;/a&gt; 中已经简要介绍了，这里再次吐槽
+一下 CMCC，网页登录界面写得太烂，每次跳转到登录界面后浏览器都不能自动把
+所有内容加载，不知道使用了什么奇葩技术，各大浏览器都将那段代码识别为不
+安全脚本，每次必须手动加载，而且尽管浏览器提示保存密码但却总是不能保存
+密码，所以如果用网页登录的话每次都要手动点击浏览器角上的加载不安全脚本，
+并且每次都要输入密码，除非选择了自动登录。另外比较烦的是登录成功后不能
+关闭那个页面，否则就找不到下线页面了，CMCC 你就不能提供一个统一的下线页
+面吗？虽说关机或断网一段时间（据说是15分钟）后能够自动下线，但毕竟是按
+时间计费的，每次用这种暴力下线方式都会浪费一段时间，心里想着总是不爽的。
+总之，对于一个正常的用户（或者至少一个 Geek 用户）这些都是让人无法忍受
+的，不过 CMCC-EDU 继续给用户每个月免费120小时还是值得点赞的。
+&lt;/p&gt;
+
+&lt;p&gt;
+有了不满就动手改造之，作为 coder 的好处就是对程序软件不满就可以自己动手
+hack 一个符合自己需求的。上 Python 呗
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;分析&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;加载 CMCC-EDU 登录的完整页面，查找登录按钮点击后执行的操作
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-html"&gt;&amp;lt;&lt;span style="font-weight: bold;"&gt;div&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;id&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"Wp_submit"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;class&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"Wp_submit"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;style&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"cursor:pointer;"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;onclick&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"checkField()"&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style="font-weight: bold;"&gt;div&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;
+如上， &lt;code&gt;onclick&lt;/code&gt; 只是调用一段 js 对用户输入信息进行有效性检查，理
+论上应该是将用户信息用 post 方法提交到服务器，这样才会比较安全。
+继续查找有没有 post 方法的表单，发现如下面一行
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-html"&gt;&amp;lt;&lt;span style="font-weight: bold;"&gt;form&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;id&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"Wlan_Login"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;action&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"https://211.136.25.211:443/login.do?"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;method&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"post"&lt;/span&gt; &lt;span style="font-weight: bold; font-style: italic;"&gt;name&lt;/span&gt;=&lt;span style="font-style: italic;"&gt;"login"&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;
+That's it! 这个 form 下包括用户输入的信息和一些隐藏的信息（即用户
+通过WIFI获得的AC相关的信息），要实现登录就得把这些信息 post 到上
+面的 &lt;code&gt;action&lt;/code&gt; 那个 URL 中去。然后我们尝试登录一次，看看数据是怎样
+post 到服务器上去的。登录成功后打开 Firebug，查看 Net ，点开
+&lt;code&gt;POST login.do?&lt;/code&gt; ，然后再看里面的 Post ，其中 Source 就是我们提交
+到服务器上的信息。
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://self-definition.com/galleries/screenshot/cmcc_edu_net.png" alt="cmcc_edu_net.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Firebug&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://self-definition.com/galleries/screenshot/cmcc_edu_login.png" alt="cmcc_edu_login.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Login&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;同样方法分析下线操作，下线之后就可以查看 Firebug Net 里的 &lt;code&gt;POST
+      logout.do&lt;/code&gt; 了，同样 Source 里的信息就是我们要提交的信息，可以发现
+登录和下线的服务器是没有变的
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://self-definition.com/galleries/screenshot/cmcc_edu_logout.png" alt="cmcc_edu_logout.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Logout&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;有了上述分析就可以用 python 将 Source 里的信息 post 到服务器上试
+试登录和下线了，Python 标准库中 urllib(2) 和 httplib 可以用来请求
+网页，不过 API 调用很复杂，网上有一个好用的第三方 http 库：
+&lt;a href="https://github.com/kennethreitz/requests"&gt;requests&lt;/a&gt; ，口号是： &lt;b&gt;HTTP for Humans&lt;/b&gt; 。对比一下 urllib 和 requests，发
+现 requests 真的是 For Humans，API 调用非常简单直接，很符合
+python 哲学： &lt;i&gt;Simple is better than complex. Readability counts&lt;/i&gt; . 
+安装之： &lt;code&gt;pip install requests --user&lt;/code&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold;"&gt;import&lt;/span&gt; requests
+&lt;span style="font-weight: bold; font-style: italic;"&gt;source&lt;/span&gt; = &lt;span style="font-style: italic;"&gt;'Copied From Firebug-&amp;gt; Net-&amp;gt; POST login.do?-&amp;gt; Post-&amp;gt; Source'&lt;/span&gt;
+&lt;span style="font-weight: bold; font-style: italic;"&gt;url&lt;/span&gt; = &lt;span style="font-style: italic;"&gt;'Copied form-&amp;gt; action'&lt;/span&gt;  &lt;span style="font-weight: bold; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;see above &amp;lt;form id="Wlan_Login" action="xxx" ...&amp;gt;&lt;/span&gt;
+&lt;span style="font-weight: bold; font-style: italic;"&gt;r&lt;/span&gt; = requests.post(url+&lt;span style="font-style: italic;"&gt;'&amp;amp;'&lt;/span&gt;+source)
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;
+用上述代码在 python 解释器中运行一下，然后打开网页看看是否已经登
+录，如果登录成功的话，再试试下面的下线操作
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;source&lt;/span&gt; = &lt;span style="font-style: italic;"&gt;'Copied From Firebug-&amp;gt; Net-&amp;gt; POST logout-&amp;gt; Post-&amp;gt; Source'&lt;/span&gt;
+&lt;span style="font-weight: bold; font-style: italic;"&gt;url&lt;/span&gt; = url.replace(&lt;span style="font-style: italic;"&gt;'login'&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;'logout'&lt;/span&gt;)
+&lt;span style="font-weight: bold; font-style: italic;"&gt;r&lt;/span&gt; = request.post(url+&lt;span style="font-style: italic;"&gt;'&amp;amp;'&lt;/span&gt;+source)
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;
+不出意外的话，上面登录和下线操作都可以成功，下一步就是将上面的手
+动 Copy 变成自动完成
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;提取登录信息，第1步中已经找到这些信息在那个 form 中，通过程序将其
+提取出来就可以替代手工 copy 操作，可以通过 HTMLParser 库或 re 库
+完成，不过 CMCC 为我们提供了另一种方案。不知你有没有注意到打开网
+页后跳转到的登录页面的 URL，它已经包含我们登录所需的信息了，这位
+我们直接解析这个 URL 比从整个网页中提取信息要方便多了，你可能会说
+Source 里有好长一段数据呢，URL 里并不包含所有这些数据啊，但是通过
+尝试你会发现其它 URL 中没有的信息都是服务器默认的或者对某种登录方
+式而言是固定的，所以服务器真正需要的信息只有 staticusername,
+staticpassword, wlanacname, wlanuserip, loginmode, wlanacssid 这
+几个量，而上面所需的 url 也包含在重定向的 URL 中
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;实现&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+有了上述分析，实现起来就很 Easy 了，具体实现请直接看 &lt;a href="https://github.com/dengshuan/cmcc-edu/blob/master/cmcc_edu.py"&gt;代码&lt;/a&gt; ，这里就不
+再赘述了。通过上面的分析基本上对一些网页登录操作过程就清楚了，所以不
+要再抱怨你们校园网没有 Linux 客户端了，只要提供网页登录，根据上面的
+分析赶紧自己 hack 一个客户端，即使是在控制台下也可以轻松实现登录，只
+要你愿意，完全可以实现开机自动登录你们的校园网
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;Todo&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;希望以后有空将这个客户端扩展到能支持 CMCC
+&lt;/li&gt;
+&lt;li&gt;考虑用 python 标准库 urllib(2) 和 httplib 重新实现，使安装使用更容
+易
+&lt;/li&gt;
+&lt;li&gt;加入图形界面，顺便用 py2exe 打包给 Windows 用户使用
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>python</category><category>hack</category><guid>http://self-definition.com/posts/cmcc-edu-jian-yi-ke-hu-duan.html</guid><pubDate>Tue, 04 Mar 2014 15:07:43 GMT</pubDate></item><item><title>AVOS Cloud Hackathon 活动</title><link>http://self-definition.com/posts/avos-cloud-hackathon-huo-dong.html</link><description>&lt;p&gt;
 从 SegmentFault 侧栏广告位看到 AVOS Cloud 在这两天举行，当时看 V2EX 上
 没人发相关的信息，于是就把这条贴了上去，顺便征询 V 友意见，有前辈鼓励和
 一批 V 友回复，头脑发热就报了名，同时征了几个队友，好像大家都比较酱油，
