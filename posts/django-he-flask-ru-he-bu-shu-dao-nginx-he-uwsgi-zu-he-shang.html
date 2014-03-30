@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Yu Feng">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django和Flask如何部署到Nginx+uWSGI组合上 | Yu Feng's blogs</title>
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+    
+</head>
+
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="http://self-definition.com/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://github.com/dengshuan" title="My Github"><i class="icon-github"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name" itemprop="headline name">Django和Flask如何部署到Nginx+uWSGI组合上</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2014-03-30T20:28:23+08:00">2014-03-30 20:28</time>
+            </div>
+            
+
+            
+          |  
+        <a href="django-he-flask-ru-he-bu-shu-dao-nginx-he-uwsgi-zu-he-shang.org" id="sourcelink">Source</a>
+
+            
+    <div class="tags">
+        <ul>
+        More posts about:  
+            <li><a class="tag" href="../categories/django.html">django</a></li>
+            <li><a class="tag" href="../categories/flask.html">flask</a></li>
+            <li><a class="tag" href="../categories/nginx.html">nginx</a></li>
+            <li><a class="tag" href="../categories/uwsgi.html">uwsgi</a></li>
+        </ul>
+    </div>
+
+        </div>
+        <div class="body">
+            <p>
+Django 或 Flask 在本机利用各自自带的开发服务器写得差不多时，就该考虑将
+程序部署到服务器上了，官方文档都有相应的指导，不过一来好多 E 文，虽说慢
+慢看也能看出名堂，但发现自己 E 文还是没有达到随心所欲的境界，中文文档不
+管多么长一大段，总能刷一眼就将文章大概和关键词抓住，而 E 文却得细细看才
+能领悟内容，所以写这篇博客作为备忘，也希望能帮到有需要的同学，另外官方
+文档有些细节可能并没有涉及。
+</p>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">django</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+django 在开发时一般在 settings.py 中将 debug 选项打开，方便调试。其
+模板和静态文件一般都放在相应 app 目录里面。例如在 <b>venv</b> 目录里用
+<code>django-admin.py startproject mysite</code> 创建项目 <b>mysite</b> ，然后用
+<code>django-admin.py startapp app1</code> 创建应用 <b>app1</b> ，则相应的模板和静态
+文件目录为 <b>~/venv/mysite/app1/templates/app1/</b> 和
+<b>~/venv/mysite/app1/static/app1/</b> ，这个看起来会比较怪，你会想
+django 为什么这么 SB 的在每个应用下面还创建一个应用的子目录呢，因为
+django会默认到每个应用的 templates 目录下查找模板，如果你的应用
+app1 和app2 都有一个相同名字的模板，比如 <b>header.html</b> ，django 就没
+法判断该用哪个模板渲染，所以比较好的方法是用模板命名空间(template
+namespacing)，即在每个模板前加上应用名作为命名空间，如 <code>{% extends
+   'app1/header.html' %}</code> ，静态文件也是同样的道理。
+</p>
+
+<p>
+当采用其它服务器运行 django 应用时，django 就不再 serve 静态文件了，
+即使开启了 debug，因为这时 django 会认为你有生产服务器了，不需要我
+这个破开发服务器 server 静态文件了，所以你必须自己配置服务器
+server 静态文件，但正如前面说的，django 的静态文件是分散在各个 app
+里面的，该怎么才能更加方便的让 nginx,apache 等托管这些分散的静态文
+件呢？在 nginx,apache 的配置文件里写正则表达式去匹配？No,no！这里
+django manage.py 里提供了一个方便的命令行工具 collectstatic ，字面
+意思就是收集静态文件，运行 <code>python manage.py collectstatic</code> 会将分
+散的静态文件收集起来，不过运行这个命令前需要在 <b>settings.py</b> 中指定
+收集到哪， <code>STATIC_ROOT = os.path.join(BASE_DIR, "static/")</code> 这样设
+置后会将所有用到的静态文件都收集到 <b>static</b> 目录下，而且是按 app 分
+子目录的，如 static/admin, static/app1, static/app2，其实说白了这条
+命令就是执行了一系列的 cp 命令。然后就可以通过配置 nginx,apache 轻
+松地托管静态文件了。很多新手在使用 django 时都有可能会碰到这个问题：
+用 nginx 或 apache 部署 django 网站时 admin 页面的静态文件丢失了，
+然后不同地方会告诉你不同的解决方案，虽说都能起作用，不过用
+collectstatic 的方式是最容易也最符合 django 之道的，另外说一句，既
+然用了 django 框架就尽量按 django 方式去处理问题，这样会变得很轻松。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Flask</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+相比 Django，<a href="http://flask.pocoo.org/">Flask</a> 小项目坑就比较少了，因为一般都是直接将所有静态文
+件扔到一个 static 目录下面，配置 Nginx 就方便多了，不过对于 Flask 大
+项目来说，一般都是推荐用 <a href="http://flask.pocoo.org/docs/blueprints/">Blueprints</a> 由于本人还没有用 Flask 做过大项
+目，所以具体情况不太了解，后面只给出 Flask 小项目的（Nginx+uWSGI）的
+配置
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">uWSGI</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+WSGI(python web server gateway interface) 是 python 界的 web 标准接
+口，维基上的解释“WSGI是作为Web服务器与Web应用程序或应用框架之间的一
+种低级别的接口，以提升可移植Web应用开发的共同点”，因为以前python 的
+web 应用程序都是针对某种接口设计的，选择某种框架意味着必须使用某种特
+定的服务器。有了 WSGI 标准（2003年）后，所有应用只要遵循这个接口协议
+就可以使用任何服务器。所以现在很少看到有 python 用
+cgi,fastcgi,mod<sub>python</sub> 的，基本统一在 WSGI 标准下。<a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a> 是 wsgi 的
+一种高性能的实现，有很多文章对 uWSGI,fastcgi,gunicorn 等的测评都表明
+uWSGI 的性能很强悍（完秒其余）。这个 uWSGI 就不仅仅是服务于python 程
+序了，因为在 python 之后其它脚本语言也都有相应的 WSGI 版本。不同语言
+使用 uWSGI 服务器，只需相应的插件就行。
+</p>
+
+<p>
+安装使用 uWSGI 也是相当容易的，直接用相应发行版的 package manager 安
+装 uwsgi 就行，不过如果不是用 python 的包管理器安装的，则对于python
+web 应用来说还需要安装 python 的相应插件 <b>uwsgi-plugin-python</b> 。很
+多人跟着某些博客中的教程使用 uwsgi 时都会碰到 <code>uwsgi: unrecognized
+   option ...</code> ，如 <code>--module</code> , <code>--wsgi-file</code> , <code>--callable</code> 等，最开
+始我也碰到这样的问题， <code>uwsgi --help</code> 得到一大堆帮助信息（吐槽下，
+uWSGI 用户接口方面太不友好了，输出这么一大堆信息会吓着初学者，而且也
+很难从中找到需要的帮助信息，要是你用管道加 less ，那我就无话可说了），
+找了下发现的确没有这些选项，第一反应是版本对不上，后来发现相同版本也
+会遇到这个问题，然后才找到问题的根源，需要在上面那些未识别选项前加上
+<code>--plugin python</code> 来告诉 uWSGI 我在使用 python 插件，后面那些选项你
+用python 插件去解析。
+</p>
+
+<p>
+老用那一长串命令选项当然很不爽，uWSGI 允许你用多种文件格式
+（xml,ini,json,yaml）将上述命令行选项保存起来，然后用相应的选项
+(-x,-i,-j,-y)告诉 uWSGI 你的配置文件格式。一个典型的 xml 格式的配置
+文件如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;<span style="font-weight: bold;">uwsgi</span>&gt;
+  &lt;<span style="font-weight: bold;">plugin</span>&gt;python&lt;/<span style="font-weight: bold;">plugin</span>&gt;
+  &lt;<span style="font-weight: bold;">socket</span>&gt;127.0.0.1:8000&lt;/<span style="font-weight: bold;">socket</span>&gt;
+  &lt;<span style="font-weight: bold;">chdir</span>&gt;/home/yufeng/venv/mysite&lt;/<span style="font-weight: bold;">chdir</span>&gt;
+  &lt;<span style="font-weight: bold;">home</span>&gt;/home/yufeng/venv&lt;/<span style="font-weight: bold;">home</span>&gt;
+  &lt;<span style="font-weight: bold;">module</span>&gt;django_wsgi&lt;/<span style="font-weight: bold;">module</span>&gt;
+  &lt;<span style="font-weight: bold;">processes</span>&gt;4&lt;/<span style="font-weight: bold;">processes</span>&gt;
+  &lt;<span style="font-weight: bold;">daemonize</span>&gt;uwsgi.log&lt;/<span style="font-weight: bold;">daemonize</span>&gt;
+&lt;/<span style="font-weight: bold;">uwsgi</span>&gt;
+</pre>
+</div>
+<p>
+其中 module 是 <b>django<sub>wsgi</sub>.py</b> 文件，该文件与 <b>manage.py</b> 在同一目录，
+文件内容如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/usr/bin/python</span>
+<span style="font-weight: bold;">import</span> os
+
+os.environ.setdefault(<span style="font-style: italic;">"DJANGO_SETTINGS_MODULE"</span>, <span style="font-style: italic;">"mysite.settings"</span>)
+
+<span style="font-weight: bold;">from</span> django.core.handlers.wsgi <span style="font-weight: bold;">import</span> WSGIHandler
+<span style="font-weight: bold; font-style: italic;">application</span> = WSGIHandler()
+</pre>
+</div>
+
+<p>
+Flask 的 uWSGI 配置文件（ini 版）如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-conf">[<span style="font-weight: bold; text-decoration: underline;">uwsgi</span>]
+<span style="font-weight: bold; font-style: italic;">plugins</span>=python
+<span style="font-weight: bold; font-style: italic;">vhost</span>=true
+<span style="font-weight: bold; font-style: italic;">socket</span>=127.0.0.1:9001
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">nginx</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+据说这货比 Apache 性能更强悍，这个对于我这种低端用户来说意义不大，
+而且也不能跟风评论。不过轻量级这个还是可以直观的看出端倪的，两者最
+新稳定版本源码文件： <i>nginx-1.4.7.tar.gz</i> 是751k，而
+<i>httpd-2.2.26.tar.gz</i> 是6.9MB，几乎有10倍的差距，虽说最终编译运行的
+程序差别不一定是这么大，但 nginx 轻量级还是无疑的。
+</p>
+
+<p>
+废话少说，直接看如何配置 nginx 吧。主配置文件是
+<b>/etc/nginx/ngnix.conf</b> ，deb 系发行版在配置目录下建了两个目录
+<b>sites-available</b> 和 <b>sites-enabled</b> ，这样的确会方便很多。
+<b>nginx.conf</b> 中配置详细解释可以戳 <a href="http://tengine.taobao.org/book/chapter_02.html#id6">这里</a> ，讲解的非常详细，这里就不再
+啰嗦了。为了保证不出现 403 Forbidden ，一般有两种方案：把项目的
+owner 改为 www-data(deb系下) <code>chown www-data:www-data
+   mysite/static</code> ；将 nginx.conf 中的 user 改为你当前用户。下面贴上根
+据上面 Django 和 Flask 的 uWSGI 配置相应的 nginx 配置，都是假设项目
+在 <a href="http://www.raspberrypi.org">RaspberryPi</a> 上。
+</p>
+
+<p>
+Django:
+</p>
+<pre class="example">
+user pi;
+work_processes 2;
+http {
+     upstream django {
+              server 127.0.0.1:8001;
+              }
+     server {
+            listen 8000;
+            server_name localhost;
+            location /static/ {
+                     alias /home/pi/venv/mysite/static/;
+                     }
+            location /media/ {
+                     alias /home/pi/venv/mysite/media/;
+                     }
+            location / {
+                     uwsgi_pass django;
+                     include uwsgi_params;
+                     }               
+     }
+}
+</pre>
+
+<p>
+Flask:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-conf">user pi;
+work_processes 2;
+<span style="font-weight: bold; text-decoration: underline;">server</span> {
+        listen 5000;
+        server_name hostname;
+
+        <span style="font-weight: bold; text-decoration: underline;">location /static</span> {
+                alias /home/pi/venv/mysite/static;
+        }
+
+        <span style="font-weight: bold; text-decoration: underline;">location /</span> {
+                include uwsgi_params;
+                uwsgi_pass 127.0.0.1:9001;
+                uwsgi_param UWSGI_PYHOME /home/pi/venv;
+                uwsgi_param UWSGI_CHDIR /home/pi/venv/mysite;
+                uwsgi_param UWSGI_MODULE mysite;
+                uwsgi_param UWSGI_CALLABLE app;
+        }         
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="cmcc-edu-jian-yi-ke-hu-duan.html" rel="prev">← Previous post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="cbsw",
+            disqus_url="http://self-definition.com/posts/django-he-flask-ru-he-bu-shu-dao-nginx-he-uwsgi-zu-he-shang.html",
+        disqus_title="Django\u548cFlask\u5982\u4f55\u90e8\u7f72\u5230Nginx+uWSGI\u7ec4\u5408\u4e0a",
+        disqus_identifier="cache/posts/django-he-flask-ru-he-bu-shu-dao-nginx-he-uwsgi-zu-he-shang.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+            Contents © 2014         <a href="mailto:dengshuan09%20AT%20gmail%20DOT%20com">Yu Feng</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+            
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+        </div>
+    </section>
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+    
+</body>
+</html>
