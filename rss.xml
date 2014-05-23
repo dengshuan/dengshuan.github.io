@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs</title><link>http://self-definition.com/</link><description>御风而行，从心所欲不逾矩</description><atom:link href="http://self-definition.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 30 Mar 2014 23:15:04 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Django和Flask如何部署到Nginx+uWSGI组合上</title><link>http://self-definition.com/posts/django-he-flask-ru-he-bu-shu-dao-nginx-he-uwsgi-zu-he-shang.html</link><description>&lt;p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs</title><link>http://self-definition.com/</link><description>御风而行，从心所欲不逾矩</description><atom:link href="http://self-definition.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 23 May 2014 22:24:01 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Django和Flask如何部署到Nginx+uWSGI组合上</title><link>http://self-definition.com/posts/django-he-flask-ru-he-bu-shu-dao-nginx-he-uwsgi-zu-he-shang.html</link><description>&lt;p&gt;
 Django 或 Flask 在本机利用各自自带的开发服务器写得差不多时，就该考虑将
 程序部署到服务器上了，官方文档都有相应的指导，不过一来好多 E 文，虽说慢
 慢看也能看出名堂，但发现自己 E 文还是没有达到随心所欲的境界，中文文档不
@@ -47,7 +47,6 @@ collectstatic 的方式是最容易也最符合 django 之道的，另外说一�
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;Flask&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -60,7 +59,6 @@ collectstatic 的方式是最容易也最符合 django 之道的，另外说一�
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h2 id="sec-3"&gt;uWSGI&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -141,7 +139,6 @@ Flask 的 uWSGI 配置文件（ini 版）如下：
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
 &lt;h2 id="sec-4"&gt;nginx&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
@@ -340,7 +337,6 @@ staticpassword, wlanacname, wlanuserip, loginmode, wlanacssid 这
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;实现&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -353,6 +349,7 @@ staticpassword, wlanacname, wlanuserip, loginmode, wlanacssid 这
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h2 id="sec-3"&gt;Todo&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -483,6 +480,7 @@ git commit -a -m "My first post"
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;远程库(remote repository)&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -509,6 +507,7 @@ git_work_tree=/srv/http/blogs git checkout -f
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h2 id="sec-3"&gt;连接本地库和远程库&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -544,11 +543,10 @@ Emacs 里实现一键发布）
 &lt;h2 id="sec-1"&gt;字体标记&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-&lt;code&gt;mono&lt;/code&gt;, &lt;b&gt;bold&lt;/b&gt; ，/italic/ , &lt;code&gt;verbatim&lt;/code&gt; , &lt;span class="underline"&gt;underlined&lt;/span&gt;
+&lt;code&gt;mono&lt;/code&gt;, &lt;b&gt;bold&lt;/b&gt; ， &lt;i&gt;italic&lt;/i&gt; , &lt;code&gt;verbatim&lt;/code&gt; , &lt;span class="underline"&gt;underlined&lt;/span&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;公式和代码&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -578,6 +576,7 @@ x = \sqrt{b}
 &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;插入代码
+支持语法高亮需要 Emacs 的 htmlize 插件，一直有问题啊！
 &lt;pre class="example"&gt;
 # 安装 Nikola 和 Orgmode 插件
 pip install nikola --user
@@ -590,28 +589,38 @@ nikola install_plugin orgmode
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;#&lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;!/usr/bin/env python&lt;/span&gt;
-&lt;span style="font-weight: bold;"&gt;print&lt;/span&gt; &lt;span style="font-style: italic;"&gt;"Hello,world!"&lt;/span&gt;
+&lt;pre class="src src-python"&gt;#!/usr/bin/env python
+print "Hello,world!"
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;
 C 语言的 &lt;i&gt;Hello-world&lt;/i&gt; 程序
 &lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-c"&gt;#include &amp;lt;stdio.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  printf ("Hello,world!\n");
+  return 0;
+}
+&lt;/pre&gt;
+&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h2 id="sec-3"&gt;链接，表格&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-点&lt;a href="http://self-definition.com"&gt;这里&lt;/a&gt; 访问我的主页
+点&lt;a href="http://self-definition.com"&gt;这里&lt;/a&gt;访问我的主页
 &lt;/p&gt;
 
 &lt;p&gt;
 插入表格也是极其方便的
 &lt;/p&gt;
+
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
 
@@ -670,6 +679,7 @@ C 语言的 &lt;i&gt;Hello-world&lt;/i&gt; 程序
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;为 Nikola 增加 orgmode 支持&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -683,11 +693,11 @@ orgmode 插件，简单的 &lt;code&gt;nikola install_plugin orgmode&lt;/code&gt
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre class="src src-python"&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;在 posts 和 stories 中添加&lt;/span&gt;
-(&lt;span style="font-style: italic;"&gt;"posts/*.org"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"posts"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"post.tmpl"&lt;/span&gt;),
-(&lt;span style="font-style: italic;"&gt;"stories/*.org"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"stories"&lt;/span&gt;, &lt;span style="font-style: italic;"&gt;"stories.tmpl"&lt;/span&gt;),
-&lt;span style="font-weight: bold; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="font-weight: bold; font-style: italic;"&gt;在 COMPILERS 中添加&lt;/span&gt;
-{&lt;span style="font-style: italic;"&gt;"orgmode"&lt;/span&gt;: (&lt;span style="font-style: italic;"&gt;'.org'&lt;/span&gt;,),}
+&lt;pre class="src src-python"&gt;# 在 posts 和 stories 中添加
+("posts/*.org", "posts", "post.tmpl"),
+("stories/*.org", "stories", "stories.tmpl"),
+# 在 COMPILERS 中添加
+{"orgmode": ('.org',),}
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;

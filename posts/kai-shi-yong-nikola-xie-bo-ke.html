@@ -1,13 +1,14 @@
 <!DOCTYPE html><html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="Yu Feng">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yu Feng">
     <title>开始用 Nikola 写博客 | Yu Feng's blogs</title>
     
             <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://self-definition.com/posts/kai-shi-yong-nikola-xie-bo-ke.html">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
@@ -17,51 +18,82 @@
 
 
 
+
+
     
 </head>
-
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="http://self-definition.com/about.html" title="About me"><i class="icon-user"></i></a></li>
-            <li><a href="https://github.com/dengshuan" title="My Github"><i class="icon-github"></i></a></li>
-            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+<!-- Menubar -->
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
-            
-    <div class="post">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://self-definition.com/">Yu Feng's blogs</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+              <li><a href="../index.html" title="Home"><i class="fa fa-home"></i></a>
+              </li><li><a href="../archive.html" title="Archives"><i class="fa fa-archive"></i></a>
+              </li><li><a href="../categories/index.html" title="Tags"><i class="fa fa-tags"></i></a>
+              </li><li><a href="../rss.xml" title="RSS"><i class="fa fa-rss"></i></a>
+              </li><li><a href="../pages/about.html" title="About me"><i class="fa fa-user"></i></a>
+              </li><li><a href="https://github.com/dengshuan" title="Github"><i class="fa fa-github"></i></a>
+              </li><li><a href="http://weibo.com/u/2707414305/" title="weibo"><i class="fa fa-weibo"></i></a>
+              </li><li><a href="https://plus.google.com/115298504581407478514/posts" title="Google+"><i class="fa fa-google-plus"></i></a>
+
+            </li></ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="kai-shi-yong-nikola-xie-bo-ke.rst" id="sourcelink">Source</a>
+    </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- End of Menubar -->
+
+<div class="container">
+  <div class="body-content">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+	<!--Body content-->
+        
+    <article class="postbox post-text">
+    <div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
     
     <h1 class="p-name" itemprop="headline name">开始用 Nikola 写博客</h1>
 
-        <div class="meta">
-            <div class="authordate">
-                <time class="timeago" datetime="2014-02-01T14:21:49+08:00">2014-02-01 14:21</time>
-            </div>
-            
+    <small>
+        Posted: <time class="timeago" datetime="2014-02-01T14:21:49+08:00">2014-02-01 14:21</time>
+        
 
-            
+        
           |  
-        <a href="kai-shi-yong-nikola-xie-bo-ke.rst" id="sourcelink">Source</a>
+        More posts about 
+    <span itemprop="keywords">
+        <a class="tag p-category" href="../categories/python.html"><span class="badge badge-info">python</span></a>
+        <a class="tag p-category" href="../categories/nikola.html"><span class="badge badge-info">nikola</span></a>
+    </span>
 
-            
-    <div class="tags">
-        <ul>
-        More posts about:  
-            <li><a class="tag" href="../categories/python.html">python</a></li>
-            <li><a class="tag" href="../categories/nikola.html">nikola</a></li>
-        </ul>
-    </div>
 
-        </div>
-        <div class="body">
-            <div><div class="section" id="id1">
+    </small>
+    <hr>
+    <div class="e-content" itemprop="articleBody text">
+    <div><div class="section" id="id1">
 <h3>源起</h3>
 <p>作为一个技术人，拥有一个自己的博客是必须的，可以用来记录自己学习笔记，
 平时学习工作中遇到的问题的解决方法，发表对一些技术的看法和观点以及对人
@@ -144,15 +176,16 @@ pip2 install nikola requests webassets --user
 </ol>
 </div>
 </div></div>
-        </div>
-        
+    </div>
+    </div>
+    
         <ul class="pager">
             <li class="next">
                 <a href="wei-nikola-zeng-jia-orgmode-zhi-chi.html" rel="next">Next post →</a>
             </li>
         </ul>
 
-            
+        
         
         <div id="disqus_thread"></div>
         <script>
@@ -173,12 +206,25 @@ pip2 install nikola requests webassets --user
     <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-        
+    
 
+    </article>
+
+	<!--End of body content-->
+	<footer>
+	  Contents © 2014         <a href="mailto:dengshuan09%20AT%20gmail%20DOT%20com">Yu Feng</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+	</footer>
+      </div>
     </div>
+  </div>
+</div>
 
-            Contents © 2014         <a href="mailto:dengshuan09%20AT%20gmail%20DOT%20com">Yu Feng</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
-            
+
+
+
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
@@ -193,18 +239,14 @@ pip2 install nikola requests webassets --user
 <!-- End of social buttons -->
 
 
-        </div>
-    </section>
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
-            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     $(function(){
+       $('.timeago').timeago();
+     });
+    </script>
+    
 
-    
-        <script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
-        </script>
-    
-    
 </body>
 </html>

@@ -1,39 +1,77 @@
 <!DOCTYPE html><html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="description" content="None">
-    <meta name="author" content="Yu Feng">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yu Feng">
     <title>life | Yu Feng's blogs</title>
     
             <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+      <link rel="canonical" href="http://self-definition.com/galleries/life/index.html">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 
     
-    
+<style type="text/css">
+    .image-block {
+        display: inline-block;
+    }
+    .flowr_row {
+        width: 100%;
+    }
+    </style>
+
     
 </head>
-
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="../../index.html" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="../../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="http://self-definition.com/about.html" title="About me"><i class="icon-user"></i></a></li>
-            <li><a href="https://github.com/dengshuan" title="My Github"><i class="icon-github"></i></a></li>
-            <li><a href="../../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+<!-- Menubar -->
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
-            
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://self-definition.com/">Yu Feng's blogs</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+              <li><a href="../../index.html" title="Home"><i class="fa fa-home"></i></a>
+              </li><li><a href="../../archive.html" title="Archives"><i class="fa fa-archive"></i></a>
+              </li><li><a href="../../categories/index.html" title="Tags"><i class="fa fa-tags"></i></a>
+              </li><li><a href="../../rss.xml" title="RSS"><i class="fa fa-rss"></i></a>
+              </li><li><a href="../../pages/about.html" title="About me"><i class="fa fa-user"></i></a>
+              </li><li><a href="https://github.com/dengshuan" title="Github"><i class="fa fa-github"></i></a>
+              </li><li><a href="http://weibo.com/u/2707414305/" title="weibo"><i class="fa fa-weibo"></i></a>
+              </li><li><a href="https://plus.google.com/115298504581407478514/posts" title="Google+"><i class="fa fa-google-plus"></i></a>
+
+            </li></ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- End of Menubar -->
+
+<div class="container">
+  <div class="body-content">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+	<!--Body content-->
+        
     
 <ul class="breadcrumb">
         <li><a href="../">galleries</a></li>
@@ -41,15 +79,30 @@
 </ul>
 
     <h1>life</h1>
-    <ul>
-    </ul>
-    <ul class="thumbnails">
-            <li><a href="../../../galleries/life/hackathon.jpg" class="thumbnail image-reference" title="Galleries/life/hackathon">
-                <img src="hackathon.thumbnail.jpg" alt="Galleries/life/hackathon"></a>
-    </li></ul>
 
-            Contents © 2014         <a href="mailto:dengshuan09%20AT%20gmail%20DOT%20com">Yu Feng</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
-            
+    <div id="gallery_container"></div>
+    <noscript>
+    <ul class="thumbnails">
+            <li><a href="hackathon.jpg" class="thumbnail image-reference" title="Output/galleries/life/hackathon">
+                <img src="hackathon.thumbnail.jpg" alt="Output/galleries/life/hackathon"></a>
+    </li></ul>
+    </noscript>
+
+	<!--End of body content-->
+	<footer>
+	  Contents © 2014         <a href="mailto:dengshuan09%20AT%20gmail%20DOT%20com">Yu Feng</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+	</footer>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+            <script src="../../assets/js/all-nocdn.js" type="text/javascript"></script>
+
+
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
@@ -64,18 +117,47 @@
 <!-- End of social buttons -->
 
 
-        </div>
-    </section>
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
-            <script src="../../assets/js/all-nocdn.js" type="text/javascript"></script>
-
-    
-        <script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
+<script src="../../assets/js/flowr.plugin.js"></script>
+<script>
+jsonContent = [{"url": "hackathon.jpg", "title": "Output/galleries/life/hackathon", "size": {"h": 135, "w": 180}, "url_thumb": "hackathon.thumbnail.jpg"}];
+$("#gallery_container").flowr({
+        data : jsonContent,
+        height : 180*.6,
+        padding: 5,
+        rows: -1,
+        render : function(params) {
+            // Just return a div, string or a dom object, anything works fine
+            img = $("<img />").attr({
+                'src': params.itemData.url_thumb,
+                'width' : params.width,
+                'height' : params.height
+            }).css('max-width', '100%');
+            link = $( "<a></a>").attr({
+                'href': params.itemData.url,
+                'class': 'image-reference'
             });
-        </script>
-    
-    
+            div = $("<div />").addClass('image-block').attr({
+                'title': params.itemData.title,
+                'data-toggle': "tooltip",
+            });
+            link.append(img);
+            div.append(link);
+            div.hover(div.tooltip());
+            return div;
+        },
+        itemWidth : function(data) { return data.size.w; },
+        itemHeight : function(data) { return data.size.h; },
+        complete : function(params) {
+            if( jsonContent.length > params.renderedItems ) {
+                nextRenderList = jsonContent.slice( params.renderedItems );
+            }
+        }
+    });
+$("a.image-reference").colorbox({rel:"gal", maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
+</script>
+
+
 </body>
 </html>

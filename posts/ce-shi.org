@@ -10,7 +10,7 @@
 
 
 * 字体标记
-  =mono=, *bold* ，/italic/ , ~verbatim~ , _underlined_
+  =mono=, *bold* ， /italic/ , ~verbatim~ , _underlined_
 * 公式和代码
    + 公式
      
@@ -28,6 +28,7 @@
      
      与 Latex 里一样，如 10m^3, CO_2
    + 插入代码
+     支持语法高亮需要 Emacs 的 htmlize 插件，一直有问题啊！
      #+BEGIN_EXAMPLE
        # 安装 Nikola 和 Orgmode 插件
        pip install nikola --user
@@ -41,8 +42,7 @@
        print "Hello,world!"
      #+END_SRC
      C 语言的 /Hello-world/ 程序
-     #+BEGIN_COMMENT
-     #+BEGIN_SRC C
+     #+BEGIN_SRC c
        #include <stdio.h>
        
        int main(int argc, char *argv[]) {
@@ -50,11 +50,11 @@
 	 return 0;
        }
      #+END_SRC
-     #+END_COMMENT
 * 链接，表格
-  点[[http://self-definition.com][这里]] 访问我的主页
+  点[[http://self-definition.com][这里]]访问我的主页
 
   插入表格也是极其方便的
+
 | Name  | Phone | Age | Country | gender |
 |-------+-------+-----+---------+--------|
 | Peter | 1234  | 15  | America | male   |

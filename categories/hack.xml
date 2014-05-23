@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (hack)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/hack.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 30 Mar 2014 22:55:28 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>CMCC-EDU 简易客户端</title><link>http://self-definition.com/posts/cmcc-edu-jian-yi-ke-hu-duan.html</link><description>&lt;p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Yu Feng's blogs (hack)</title><link>http://self-definition.com/</link><description></description><atom:link href="http://self-definition.com/categories/hack.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 23 May 2014 22:24:01 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>CMCC-EDU 简易客户端</title><link>http://self-definition.com/posts/cmcc-edu-jian-yi-ke-hu-duan.html</link><description>&lt;p&gt;
 上周抽空写了个 Python 版的 &lt;a href="https://github.com/dengshuan/cmcc-edu"&gt;CMCC-EDU 客户端&lt;/a&gt;，没什么技术含量，不过作为本
 人在 github 上的第一个实际有意义的项目，还是在这里记录一下。
 &lt;/p&gt;
@@ -120,7 +120,6 @@ staticpassword, wlanacname, wlanuserip, loginmode, wlanacssid 这
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h2 id="sec-2"&gt;实现&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -133,6 +132,7 @@ staticpassword, wlanacname, wlanuserip, loginmode, wlanacssid 这
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h2 id="sec-3"&gt;Todo&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
